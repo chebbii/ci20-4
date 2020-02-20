@@ -1,0 +1,16 @@
+name: A workflow deploy
+on: push
+jobs:
+
+
+  deploy:
+    
+    name: deploy prod
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-ruby@v1
+      - run: gem install dpl
+      - run: dpl --provider=heroku --app=${{ secrets.HEROKU_APP_NAME }} --api-key=${{ secrets.HEROKU_API_KEY }}
+
+  
